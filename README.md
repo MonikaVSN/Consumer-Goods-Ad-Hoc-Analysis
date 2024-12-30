@@ -5,20 +5,34 @@ Peripherals and Accessories,PC and Network and Storage in Platforms like Brick &
 ## Ad-Hoc-Requests
 **MYSQl Codes**
 **1.Provide list of markets in which customer "AtliQ Exclusive"operates its business in APAC region**
+      
       select distinct market,COUNT(CUSTOMER)
+      
       from dim_customer
+      
       where customer='Atliq Exclusive' and region='APAC'
   
 **2.What is the percentage of unique product increase in 2021 vs. 2020?**
+      
       with cte as
+      
       (select count(distinct product_code) as unique_products_2020,
-      		(select count(distinct product_code)
-      		from fact_sales_monthly
-      		where fiscal_year=2021) as unique_products_2021
+      		
+        (select count(distinct product_code)
+      		
+        from fact_sales_monthly
+      		
+        where fiscal_year=2021) as unique_products_2021
+      
       from fact_sales_monthly
+      
+      
       where fiscal_year=2020)
+      
       select  *,
-      	round((unique_products_2021-unique_products_2020)*100/unique_products_2020,2) as percentage_change
+      	
+       round((unique_products_2021-unique_products_2020)*100/unique_products_2020,2) as percentage_change
+      
       from cte
 
 **3.Provide a report with all the unique product counts for each  segment  and sort them in descending order of product counts.**
